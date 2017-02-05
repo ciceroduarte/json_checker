@@ -1,28 +1,16 @@
-# https://app.servicos.uol.com.br/aplicativo/uol/configs?app=bol-mail&v=1.9.0&p=iphone&so=9.2&r=retina
 require 'net/http'
 require 'json'
 require "json-diff"
-require './lib/RemoteItem.rb'
-require './JsonChecker.rb'
-
-def json_from_path(path)
-  jsonFile = open(path)
-  jsonContent = jsonFile.read
-  return JSON.parse(jsonContent)
-end
-
-def json_from_url(url)
-  uri = URI(url)
-  response = Net::HTTP.get(uri)
-  return JSON.parse(response)
-end
+require './lib/remote.rb'
+require './lib/json_validator.rb'
+require './lib/json_fetcher.rb'
 
 def fetch_remotes(remotes)
   result = Array.new
   remotes.each do |item|
     if RemoteItem.isValidRepresentation(item)
       remote = RemoteItem.new(item)
-      response = json_from_url(remote.url)
+      response = JSONFetcher.json_from_url(remote.url)
     remote.content = response
     result.insert(-1, remote)
     end
@@ -74,7 +62,7 @@ def add_item_to_group(type, change, name)
 end
 
 def diff_json(firstJson, secondJson)
-  jsonChecker = JsonChecker.new()
+  jsonChecker = JSONValidator.new()
   diff = JsonDiff.diff(firstJson.content, secondJson.content)
 
   output = upper_content("Comparing #{firstJson.name} with #{secondJson.name}")
@@ -84,7 +72,7 @@ def diff_json(firstJson, secondJson)
     puts op
 
     path = jsonDiff["path"]
-    value = jsonChecker.valueFromKeyWithSplitCharacter(path, firstJson.content, "/")
+    value = jsonChecker.value_for_key_with_split_character(path, firstJson.content, "/")
     result = ""
 
     if op === "replace"
@@ -103,7 +91,7 @@ def diff_json(firstJson, secondJson)
   return output = output + bottom_content()
 end
 
-jsonConfig = json_from_path('json-config.json')
+jsonConfig = JSONFetcher.json_from_path('json-config.json')
 
 remoteContent = jsonConfig['remote']
 
