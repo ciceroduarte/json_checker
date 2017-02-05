@@ -6,6 +6,10 @@ class JSONComparator
   
   def self.compare(jsonToCheck, compareTo)
     
+    puts "#############"
+    puts "# COMPARING #"
+    puts "#############"
+    
     compareTo.each do |compare|
       jsonToCompare = JSONToCompare.new(compare)
       
@@ -22,37 +26,26 @@ class JSONComparator
       
       jsonComparator = JSONComparator.new()
       jsonComparator.compareJSON(jsonToCheck, jsonContent)
-      
     end
-    
   end
   
   def compareJSON(jsonToCheck, jsonToCompare)
     jsonChecker = JSONValidator.new()
-    diff = JsonDiff.diff(jsonToCheck, jsonToCompare)
+    diff = JsonDiff.diff(jsonToCompare, jsonToCheck)
 
-    output = ""
-    
     diff.each_with_index do |jsonDiff, index|
       op = jsonDiff["op"]
-      puts op
-  
       path = jsonDiff["path"]
       value = jsonChecker.value_for_key_with_split_character(path, jsonToCheck, "/")
+      oldValue = jsonChecker.value_for_key_with_split_character(path, jsonToCompare, "/")
   
       if op === "replace"
-        puts "New value: #{value}"
-        puts "Old value: #{jsonDiff["value"]}"
+        puts "[REPLACED] #{oldValue} with #{value} for path: #{path}"
+      elsif op == "remove"
+        puts "[REMOVED] #{oldValue} for path: #{path}"
       else
-        puts "Value: #{value}"
+        puts "[ADDED] #{value} for path: #{path}"
       end
-      puts "For key: #{path}"
-
-      puts output
     end
-    
-    return output
   end
-  
-  
 end

@@ -22,6 +22,10 @@ class JSONValidator
         return
       end      
       
+      puts "##############"
+      puts "# VALIDATING #"
+      puts "##############"
+      
       jsonValidator = JSONValidator.new()
       jsonValidator.validate_JSON_with_keys(fileToCheck.keys, fileContent)
       
