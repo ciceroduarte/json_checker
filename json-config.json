@@ -1,48 +1,25 @@
 {
-
 	"files": [
 		{
-			"name": "File 1",
-			"path": "./teste.json",
+			"name": "JSON Questions 2",
+			"remote-path": "http://private-1e56c2-rubytest.apiary-mock.com/questions2",
 			"keys" : {
-				"user-id": 123,
-		    	"url-base": "http://www.google.com.br",
-		    	"user.active": true,
-		    	"invalid-value": "oi",
-		    	"versions.remote-block.enabled": true,
-		    	"tracking.comscore.enabled": true,
-		    	"tracking.comscore.costumer-c2": "XwP6q2rpn7yW5DSXeRr17w==",
-		    	"ads.banner.ad-unit": "/8804/uol_mobile/app/foo/bar",
-		    	"ads.interstitial.ad-unit": "/8804/uol_mobile/app/email",
-		    	"ads.interstitial.start": 2,
-		    	"ads.interstitial.step": 5,
-		    	"services.tracking-base-url": "http://app.servicos.uol.com.br/aplicativo/uol/bol-mail/omniture/request"
-			}
+				"choice": "Swift3",
+		    	"choice1": "Swift22",
+		    	"choice2": "Swift22",
+		    	"choice3": "Swift3",
+		    	"choiceTroll": "hue"
+		    },
+		    "remotes": [
+			    {
+			    	"url": "http://private-1e56c2-rubytest.apiary-mock.com/questions2",
+			    	"name": "Questions 2"
+			    },
+			    {
+			    	"url": "http://private-1e56c2-rubytest.apiary-mock.com/questions",
+			    	"name": "Questions"
+			    }
+			]
 		}
-	],
-
-    "keys": {
-  		"user-id": 123,
-    	"url-base": "http://www.google.com.br",
-    	"user.active": true,
-    	"invalid-value": "oi",
-    	"versions.remote-block.enabled": true,
-    	"tracking.comscore.enabled": true,
-    	"tracking.comscore.costumer-c2": "XwP6q2rpn7yW5DSXeRr17w==",
-    	"ads.banner.ad-unit": "/8804/uol_mobile/app/foo/bar",
-    	"ads.interstitial.ad-unit": "/8804/uol_mobile/app/email",
-    	"ads.interstitial.start": 2,
-    	"ads.interstitial.step": 5,
-    	"services.tracking-base-url": "http://app.servicos.uol.com.br/aplicativo/uol/bol-mail/omniture/request"
-    },
-    "remote": [
-	    {
-	    	"url": "http://private-1e56c2-rubytest.apiary-mock.com/questions2",
-	    	"name": "Questions 2"
-	    },
-	    {
-	    	"url": "http://private-1e56c2-rubytest.apiary-mock.com/questions",
-	    	"name": "Questions"
-	    }
-    ]
+	]
 }
