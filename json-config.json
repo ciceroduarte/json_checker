@@ -10,16 +10,12 @@
 		    	"choice3": "Swift3",
 		    	"choiceTroll": "hue"
 		    },
-		    "remotes": [
-			    {
-			    	"url": "http://private-1e56c2-rubytest.apiary-mock.com/questions2",
-			    	"name": "Questions 2"
-			    },
-			    {
-			    	"url": "http://private-1e56c2-rubytest.apiary-mock.com/questions",
-			    	"name": "Questions"
-			    }
-			]
+		    "compare-to": [
+                {
+                    "remote-path": "http://private-1e56c2-rubytest.apiary-mock.com/questions",
+                    "name": "Questions"
+                }
+		    ]
 		}
 	]
 }
