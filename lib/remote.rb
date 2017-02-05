@@ -1,4 +1,4 @@
-class RemoteItem
+class Remote
    
    attr_accessor :content
    attr_reader :name, :url
