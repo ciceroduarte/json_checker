@@ -1,14 +1,15 @@
 require "rubygems"
 require 'json'
-require './lib/file_to_check.rb'
+require './lib/json_to_check.rb'
 require './lib/json_fetcher.rb'
+require './lib/json_comparator.rb'
 
 class JSONValidator
   
   def self.validate_with_config(config)
     
     config['files'].each do |file|
-      fileToCheck = FileToCheck.new(file)
+      fileToCheck = JSONToCheck.new(file)
       
       fileContent = ""      
 
@@ -23,6 +24,8 @@ class JSONValidator
       
       jsonValidator = JSONValidator.new()
       jsonValidator.validate_JSON_with_keys(fileToCheck.keys, fileContent)
+      
+      JSONComparator.compare(fileContent, fileToCheck.compareTo)
       
     end
   end
