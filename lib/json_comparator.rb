@@ -12,20 +12,10 @@ class JSONComparator
     
     compareTo.each do |compare|
       checkableFile = CheckableFile.new(compare)
-      
-      jsonContent = ""
-      
-      if checkableFile.path.nil?
-        jsonContent = JSONFetcher.json_from_path(checkableFile.path)
-      elsif checkableFile.remotePath.nil?
-        jsonContent = JSONFetcher.json_from_url(checkableFile.remotePath)
-      else
-        puts "[ERROR] path or remote-path not found"
-        return
-      end  
+      fileContent = checkableFile.get_content()
       
       jsonComparator = JSONComparator.new()
-      jsonComparator.compareJSON(jsonToCheck, jsonContent)
+      jsonComparator.compareJSON(jsonToCheck, fileContent)
     end
   end
   

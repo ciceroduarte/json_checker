@@ -11,16 +11,7 @@ class JSONValidator
     config['files'].each do |file|
       fileToCheck = JSONToCheck.new(file)
       
-      fileContent = ""      
-
-      if !fileToCheck.path.nil?
-        fileContent = JSONFetcher.json_from_path(fileToCheck.path)
-      elsif !fileToCheck.remotePath.nil?
-        fileContent = JSONFetcher.json_from_url(fileToCheck.remotePath)
-      else
-        puts "[ERROR] path or remote-path not found"
-        return
-      end      
+      fileContent = fileToCheck.get_content()   
       
       puts "##############"
       puts "# VALIDATING #"
