@@ -6,7 +6,7 @@ class JSONFetcher
   
   def self.json_from_path(path)
     if File.file?(path)
-      jsonFile = open(path)  
+      jsonFile = open(path)
       jsonContent = jsonFile.read
       return JSON.parse(jsonContent)
     end

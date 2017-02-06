@@ -1,5 +1,5 @@
 require 'json-diff'
-require './lib/json_to_compare.rb'
+require './lib/checkable_file.rb'
 require './lib/json_fetcher.rb'
 
 class JSONComparator
@@ -11,14 +11,14 @@ class JSONComparator
     puts "#############"
     
     compareTo.each do |compare|
-      jsonToCompare = JSONToCompare.new(compare)
+      checkableFile = CheckableFile.new(compare)
       
       jsonContent = ""
       
-      if !jsonToCompare.path.nil?
-        jsonContent = JSONFetcher.json_from_path(jsonToCompare.path)
-      elsif !jsonToCompare.remotePath.nil?
-        jsonContent = JSONFetcher.json_from_url(jsonToCompare.remotePath)
+      if checkableFile.path.nil?
+        jsonContent = JSONFetcher.json_from_path(checkableFile.path)
+      elsif checkableFile.remotePath.nil?
+        jsonContent = JSONFetcher.json_from_url(checkableFile.remotePath)
       else
         puts "[ERROR] path or remote-path not found"
         return

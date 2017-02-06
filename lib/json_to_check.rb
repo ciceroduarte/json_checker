@@ -1,11 +1,11 @@
-class JSONToCheck
+require './lib/checkable_file.rb'
+
+class JSONToCheck < CheckableFile
    
-   attr_reader :name, :path, :remotePath, :keys, :remotes, :compareTo
+   attr_reader :keys, :remotes, :compareTo
  
    def initialize(representation)
-       @name = representation['name']
-       @path = representation['path']
-       @remotePath = representation['remote-path']
+       super(representation)
        @keys = representation['keys']
        @remotes = representation['remotes']
        @compareTo = representation['compare-to']
