@@ -15,11 +15,11 @@ class JSONComparator
       fileContent = checkableFile.get_content()
       
       jsonComparator = JSONComparator.new()
-      jsonComparator.compareJSON(jsonToCheck, fileContent)
+      jsonComparator.compare_json(jsonToCheck, fileContent)
     end
   end
   
-  def compareJSON(jsonToCheck, jsonToCompare)
+  def compare_json(jsonToCheck, jsonToCompare)
     jsonChecker = JSONValidator.new()
     diff = JsonDiff.diff(jsonToCompare, jsonToCheck)
 
