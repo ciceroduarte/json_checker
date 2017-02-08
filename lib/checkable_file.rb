@@ -10,18 +10,17 @@ class CheckableFile
   
   def get_content()
 
-    if !@content.nil?
-      return @content
-    end    
-
-    if !@path.nil?
-      @content = JSONFetcher.json_from_path(@path)
-    elsif !@remotePath.nil?
-      @content = JSONFetcher.json_from_url(@remotePath)
-    else
+    if @path.nil? && @remotePath.nil?
       puts "[ERROR] path or remote-path not found"
       return nil
-    end  
+    end
+
+    unless @content.nil?
+      return @content
+    end
+
+    @content = @path.nil? ? JSONFetcher.json_from_url(@remotePath) : JSONFetcher.json_from_path(@path)
+      
     return @content
   end
   
