@@ -8,7 +8,14 @@ class JSONValidator
   
   def self.validate_with_config(config)
     
-    config['files'].each do |file|
+    files = config['files']
+    
+    if files.nil? || files.empty?
+      puts "[ERROR] Invalid json"
+      return
+    end
+    
+    files.each do |file|
       fileToCheck = JSONToCheck.new(file)
       
       fileContent = fileToCheck.get_content()   
