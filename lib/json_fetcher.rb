@@ -10,6 +10,7 @@ class JSONFetcher
       jsonContent = jsonFile.read
       return JSONFetcher.json_from_content(jsonContent)
     rescue
+      puts "[ERROR] #{path} not found"
       return nil
     end
   end
