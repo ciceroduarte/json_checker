@@ -13,15 +13,18 @@ class JSONValidator
       
       fileContent = fileToCheck.get_content()   
       
-      puts "##############"
-      puts "# VALIDATING #"
-      puts "##############"
+      if !fileToCheck.keys.nil?
+        puts "############################"
+        puts " VALIDATING #{fileToCheck.name} "
+        puts "############################"
       
-      jsonValidator = JSONValidator.new()
-      jsonValidator.validate_JSON_with_keys(fileToCheck.keys, fileContent)
+        jsonValidator = JSONValidator.new()
+        jsonValidator.validate_JSON_with_keys(fileToCheck.keys, fileContent)  
+      end
       
-      JSONComparator.compare(fileContent, fileToCheck.compareTo)
-      
+      if !fileToCheck.compareTo.nil?
+        JSONComparator.compare(fileToCheck, fileToCheck.compareTo)
+      end
     end
   end
   

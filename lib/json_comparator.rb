@@ -4,18 +4,19 @@ require './lib/json_fetcher.rb'
 
 class JSONComparator
   
-  def self.compare(jsonToCheck, compareTo)
-    
-    puts "#############"
-    puts "# COMPARING #"
-    puts "#############"
-    
+  def self.compare(fileToCheck, compareTo)
+        
     compareTo.each do |compare|
+      
       checkableFile = CheckableFile.new(compare)
       fileContent = checkableFile.get_content()
       
+      puts "##########################"
+      puts " COMPARING #{fileToCheck.name} WITH #{checkableFile.name}"
+      puts "##########################"
+      
       jsonComparator = JSONComparator.new()
-      jsonComparator.compare_json(jsonToCheck, fileContent)
+      jsonComparator.compare_json(fileToCheck.get_content(), fileContent)
     end
   end
   
