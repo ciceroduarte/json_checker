@@ -5,12 +5,13 @@ require 'net/http'
 class JSONFetcher
   
   def self.json_from_path(path)
-    if File.file?(path)
+    begin
       jsonFile = open(path)
       jsonContent = jsonFile.read
       return JSONFetcher.json_from_content(jsonContent)
+    rescue
+      return nil
     end
-    return nil
   end
   
   def self.json_from_url(url)
