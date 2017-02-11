@@ -13,10 +13,8 @@ module JsonChecker
         
         checkableFile = CheckableFile.new(compare)
         fileContent = checkableFile.get_content()
-        
-        puts "##########################"
-        puts " COMPARING #{fileToCheck.name} WITH #{checkableFile.name}"
-        puts "##########################"
+
+        puts "Comparing #{fileToCheck.name} with #{checkableFile.name}"
         
         jsonComparator = JSONComparator.new()
         jsonComparator.compare_json(fileToCheck.get_content(), fileContent)

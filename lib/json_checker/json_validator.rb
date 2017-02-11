@@ -21,9 +21,7 @@ class JSONValidator
       fileContent = fileToCheck.get_content()   
       
       unless fileToCheck.keys.nil?
-        puts "############################"
-        puts " VALIDATING #{fileToCheck.name} "
-        puts "############################"
+        puts " Validating #{fileToCheck.name} values"
       
         jsonValidator = JSONValidator.new()
         jsonValidator.validate_JSON_with_keys(fileToCheck.keys, fileContent)  
