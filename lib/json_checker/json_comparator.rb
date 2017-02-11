@@ -1,12 +1,10 @@
 require 'diffy'
 require 'tempfile'
-require './lib/checkable_file.rb'
-require './lib/json_fetcher.rb'
+require 'json_checker/checkable_file'
+require 'json_checker/json_fetcher'
 
 module JsonChecker
-
   class JSONComparator
-  
     def self.compare(fileToCheck, compareTo)
           
       compareTo.each do |compare|

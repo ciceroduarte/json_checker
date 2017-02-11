@@ -1,13 +1,14 @@
-require './lib/checkable_file.rb'
+require 'json_checker/checkable_file'
 
-class JSONToCheck < CheckableFile
-   
-   attr_reader :keys, :remotes, :compareTo
- 
-   def initialize(representation)
-       super(representation)
-       @keys = representation['keys']
-       @remotes = representation['remotes']
-       @compareTo = representation['compare-to']
-  end
+module JsonChecker
+	class JSONToCheck < CheckableFile   
+	   attr_reader :keys, :remotes, :compareTo
+	 
+	   def initialize(representation)
+	       super(representation)
+	       @keys = representation['keys']
+	       @remotes = representation['remotes']
+	       @compareTo = representation['compare-to']
+	  end
+	end
 end
