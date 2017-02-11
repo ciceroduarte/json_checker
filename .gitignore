@@ -11,6 +11,7 @@
 /tmp/
 /Gemfile.lock
 /pkg/
+output.html
 
 # rspec failure tracking
 .rspec_status
