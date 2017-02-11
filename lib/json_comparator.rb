@@ -1,4 +1,5 @@
-require 'json-diff'
+require 'diffy'
+require 'tempfile'
 require './lib/checkable_file.rb'
 require './lib/json_fetcher.rb'
 
@@ -21,22 +22,22 @@ class JSONComparator
   end
   
   def compare_json(jsonToCheck, jsonToCompare)
-    jsonChecker = JSONValidator.new()
-    diff = JsonDiff.diff(jsonToCompare, jsonToCheck)
+    temp_jsonToCompare = Tempfile.new("temp_jsonToCompare") 
+    temp_jsonToCheck = Tempfile.new("temp_jsonToCheck")
 
-    diff.each_with_index do |jsonDiff, index|
-      op = jsonDiff["op"]
-      path = jsonDiff["path"]
-      value = jsonChecker.value_for_key_with_split_character(path, jsonToCheck, "/")
-      oldValue = jsonChecker.value_for_key_with_split_character(path, jsonToCompare, "/")
-  
-      if op === "replace"
-        puts "[REPLACED] #{oldValue} with #{value} for path: #{path}"
-      elsif op == "remove"
-        puts "[REMOVED] #{oldValue} for path: #{path}"
-      else
-        puts "[ADDED] #{value} for path: #{path}"
-      end
+    temp_jsonToCheck.write(jsonToCheck.to_json)
+    temp_jsonToCheck.close
+    
+    temp_jsonToCompare.write(jsonToCompare.to_json)
+    temp_jsonToCompare.close
+
+    diff = Diffy::Diff.new(temp_jsonToCheck.path, temp_jsonToCompare.path, :source => 'files', :context => 3)
+    diff.to_s.each_line do |line|
+      puts "#{line}"
     end
+
+    temp_jsonToCompare.delete
+    temp_jsonToCheck.delete
   end
+
 end
