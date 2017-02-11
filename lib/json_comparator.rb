@@ -21,23 +21,24 @@ class JSONComparator
     end
   end
   
-  def compare_json(jsonToCheck, jsonToCompare)
-    temp_jsonToCompare = Tempfile.new("temp_jsonToCompare") 
-    temp_jsonToCheck = Tempfile.new("temp_jsonToCheck")
+  def compare_json(json, jsonToCompare)    
+    temp_json = tempfile_from_json(json)
+    temp_jsonToCompare = tempfile_from_json(jsonToCompare)
 
-    temp_jsonToCheck.write(jsonToCheck.to_json)
-    temp_jsonToCheck.close
-    
-    temp_jsonToCompare.write(jsonToCompare.to_json)
-    temp_jsonToCompare.close
-
-    diff = Diffy::Diff.new(temp_jsonToCheck.path, temp_jsonToCompare.path, :source => 'files', :context => 3)
+    diff = Diffy::Diff.new(temp_json.path, temp_jsonToCompare.path, :source => 'files', :context => 3)
     diff.to_s.each_line do |line|
       puts "#{line}"
     end
 
     temp_jsonToCompare.delete
-    temp_jsonToCheck.delete
+    temp_json.delete
+  end
+
+  def tempfile_from_json(json)
+    tempfile = Tempfile.new("temp_json") 
+    tempfile.write(JSON.pretty_generate(json) + "\n")
+    tempfile.close
+    return tempfile
   end
 
 end
