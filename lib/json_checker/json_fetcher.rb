@@ -34,7 +34,7 @@ module JsonChecker
     end
     
     def self.json_from_content(content)
-      if content.nil?
+      if content.nil? || !content.is_a?(String)
         return nil
       end
 
