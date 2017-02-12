@@ -6,16 +6,21 @@ require 'json_checker/json_fetcher'
 module JsonChecker
   class JSONComparator
     def self.compare(fileToCheck, compareTo)
-          
-      compareTo.each do |compare|
-        
-        checkableFile = CheckableFile.new(compare)
-        fileContent = checkableFile.get_content()
+      
+      if fileToCheck.nil? || compareTo.nil? || !compareTo.is_a?(Array) || !fileToCheck.is_a?(CheckableFile)
+        return
+      end
 
-        puts "Comparing #{fileToCheck.name} with #{checkableFile.name}"
-        
-        jsonComparator = JSONComparator.new()
-        jsonComparator.compare_json(fileToCheck.get_content(), fileContent)
+      compareTo.each do |compare|
+        if CheckableFile.is_valid_representation?(compare)
+          checkableFile = CheckableFile.new(compare)
+          fileContent = checkableFile.get_content()
+
+          puts "Comparing #{fileToCheck.name} with #{checkableFile.name}"
+          
+          jsonComparator = JSONComparator.new()
+          jsonComparator.compare_json(fileToCheck.get_content(), fileContent)
+        end
       end
     end
 
@@ -23,24 +28,44 @@ module JsonChecker
       temp_json = tempfile_from_json(json)
       temp_jsonToCompare = tempfile_from_json(jsonToCompare)
 
-      diff = Diffy::Diff.new(temp_json.path, temp_jsonToCompare.path, :source => 'files', :context => 3)
-      puts diff
-      reportContent = html_report_from_diff(diff)
+      unless temp_json.nil? && temp_jsonToCompare.nil?
+        diff = Diffy::Diff.new(temp_json.path, temp_jsonToCompare.path, :source => 'files', :context => 3)
+        puts diff
+        report = html_report_from_diff(diff)
+        save_report_to_file(report)
 
-      File.write("output.html", reportContent)
-
-      temp_jsonToCompare.delete
-      temp_json.delete
+        temp_jsonToCompare.delete
+        temp_json.delete
+      end
     end
 
     def tempfile_from_json(json)
-      tempfile = Tempfile.new("temp_json") 
-      tempfile.write(JSON.pretty_generate(json) + "\n")
-      tempfile.close
-      return tempfile
+      json = JsonChecker::JSONFetcher.json_from_content(json)
+      unless json.nil?
+        tempfile = Tempfile.new("temp_json")
+        tempfile.write(JSON.pretty_generate(json) + "\n")
+        tempfile.close
+        return tempfile
+      end
+      puts "[ERROR] File content is not a valid JSON"
+      return nil
     end
 
-    def html_report_from_diff(diff) 
+    def save_report_to_file(report)
+      if report.nil?
+        puts "[ERROR] Invalid report"
+      else
+        File.write("output.html", report)
+      end
+      
+    end
+
+    def html_report_from_diff(diff)
+
+      if diff.nil?
+        return nil
+      end
+
       result = ""
       style = "<style>  
           .addition {
@@ -73,6 +98,11 @@ module JsonChecker
     end
 
     def add_line(line)
+      
+      if line.nil?
+        return ""
+      end 
+
       line = line.gsub("\n","")
       formatter = "<p class=\"%{first}\">%{second}</p>"
       className = "null"
