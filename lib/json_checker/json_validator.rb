@@ -3,6 +3,7 @@ require 'json'
 require 'json_checker/json_to_check'
 require 'json_checker/json_fetcher'
 require 'json_checker/json_comparator'
+require 'json_checker/html_output'
 
 module JsonChecker
   class JSONValidator
@@ -21,23 +22,27 @@ module JsonChecker
         fileContent = fileToCheck.get_content()   
         
         unless fileToCheck.keys.nil?
-          puts " Validating #{fileToCheck.name} values"
-        
+          title = "Validating #{fileToCheck.name} values"
           jsonValidator = JSONValidator.new()
-          jsonValidator.validate_JSON_with_keys(fileToCheck.keys, fileContent)  
+          jsonValidator.validate_JSON_with_keys(title, fileToCheck.keys, fileContent)
         end
         
         unless fileToCheck.compareTo.nil?
           JSONComparator.compare(fileToCheck, fileToCheck.compareTo)
         end
       end
+      HTMLOutput.generate_output()
     end
     
-      def validate_JSON_with_keys(jsonKeys, json)
+      def validate_JSON_with_keys(title, jsonKeys, json)
+        items = Array.new()
         jsonKeys.keys.each do |key|
             value = value_for_key(key, json)
-            configValue = jsonKeys[key]
-            verify_value(configValue, value, key)
+            expected = jsonKeys[key]
+            items << verify_value(expected, value, key)
+        end
+        if items.size > 0
+          HTMLOutput.add_validation_item(title, items)
         end
     end
     
@@ -59,15 +64,15 @@ module JsonChecker
         return value
     end
     
-    def verify_value(configValue, value, key)
-        formatter = "%{first} | Key: %{second} | Expected value: %{third} | Value: %{fourth}"
-        result = "[Error]    "
+    def verify_value(expected, value, key)
+        formatter = "<tr><td>%{first}</td><td>%{second}</td><td>%{third}</td><td>%{fourth}</td></tr>"
+        result = "Error"
         if value.nil?
-            result = "[Not found]"
-        elsif value == configValue
-            result = "[Success]  "
+          result = "Not found"
+        elsif value == expected
+          result = "Success"
         end
-        puts formatter % {first: result, second: key, third: configValue, fourth:value}
+        return formatter % {first: result, second: key, third:expected, fourth:value}
     end
   end
 end

@@ -38,12 +38,6 @@ RSpec.describe JsonChecker::JSONComparator do
   	JsonChecker::JSONComparator.compare(checkableFile, "invalid value")
   end
 
-  it "html_report_from_diff return nil for a invalid diff" do
-  	jsonComparator = JsonChecker::JSONComparator.new()
-  	report = jsonComparator.html_report_from_diff(nil) 
-  	expect(report).to be nil
-  end 
-
   it "add_line don't broken with a invalid line" do
   	jsonComparator = JsonChecker::JSONComparator.new()
   	jsonComparator.add_line(nil)

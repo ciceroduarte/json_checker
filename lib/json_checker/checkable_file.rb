@@ -14,9 +14,7 @@ module JsonChecker
     def self.is_valid_representation?(representation)
       json = JsonChecker::JSONFetcher.json_from_content(representation)
       unless json.nil?
-          return (json.keys.include? 'name') && 
-          (json.keys.include? 'path') || 
-          (json.keys.include? 'remote-path')
+          return (json.keys.include? 'name') && ((json.keys.include? 'path') || (json.keys.include? 'remote-path'))
       end
       return false
     end

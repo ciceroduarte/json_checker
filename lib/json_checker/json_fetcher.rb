@@ -34,12 +34,12 @@ module JsonChecker
     end
     
     def self.json_from_content(content)
-      if content.nil? || !content.is_a?(String)
+      if content.nil? || (!content.is_a?(String) && (!content.is_a?(Hash)))
         return nil
       end
 
       begin
-        return JSON.parse(content)
+        return content.is_a?(String) ? JSON.parse(content) : JSON.parse(content.to_json)
       rescue JSON::ParserError => e
         puts "[ERROR] Invalid json"
       end

@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Cícero Duarte"]
   spec.email         = ["ciceroduarte1@gmail.com"]
 
-  spec.summary       = "Write a short summary, because Rubygems requires one.}"
-  spec.description   = "Write a longer description or delete this line.}"
+  spec.summary       = "Validate fields and compare with others json files"
   spec.homepage      = "https://github.com/ciceroduarte/json_checker"
   spec.license       = "MIT"
 
