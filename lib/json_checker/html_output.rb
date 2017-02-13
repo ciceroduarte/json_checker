@@ -20,6 +20,11 @@ module JsonChecker
     end
 
     def self.add_comparation_item(title, json)
+
+      if title.nil? || json.nil?
+        return
+      end
+
       item = "<h2>#{title}</h2>" + "<div class=\"diff\">" + json + "</div>"
       if @reportItems.nil?
         @reportItems = Array.new()
