@@ -3,10 +3,13 @@ require 'json_checker/json_fetcher'
 require 'json_checker/json_validator'
 
 module JsonChecker
+  class Checker
+    def run()
+      jsonConfig = JSONFetcher.json_from_path('json-config.json')
 
-	jsonConfig = JSONFetcher.json_from_path('json-config.json')
-
-	unless jsonConfig.nil?
-  		JSONValidator.validate_with_config(jsonConfig)
-	end
+      unless jsonConfig.nil?
+      JSONValidator.validate_with_config(jsonConfig)
+      end    
+    end
+  end
 end

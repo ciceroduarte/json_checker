@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "json_checker"
+
+checker = JsonChecker::Checker.new
+checker.run()
