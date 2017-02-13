@@ -1,3 +1,8 @@
+if ENV['TRAVIS']
+  require 'coveralls'
+  Coveralls.wear!
+end
+
 require "bundler/setup"
 require "json_checker"
 

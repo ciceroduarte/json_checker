@@ -1,6 +1,7 @@
 # JsonChecker
 
 [![Build Status](https://travis-ci.org/ciceroduarte/json_checker.svg?branch=master)](https://travis-ci.org/ciceroduarte/json_checker)
+[![Coverage Status](https://coveralls.io/repos/github/ciceroduarte/json_checker/badge.svg?branch=master)](https://coveralls.io/github/ciceroduarte/json_checker?branch=master)
 
 ## Installation
 
