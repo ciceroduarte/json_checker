@@ -7,6 +7,10 @@ RSpec.describe JsonChecker::CheckableFile do
     expect(JsonChecker::CheckableFile.is_valid_representation?("{}")).not_to be true
   end
 
+  it "return false for nil representation" do
+    expect(JsonChecker::CheckableFile.is_valid_representation?(nil)).not_to be true
+  end
+
   it "return nil for get_content" do
   	checkableFile = JsonChecker::CheckableFile.new("{}") 
   	expect(checkableFile.get_content()).to be nil
