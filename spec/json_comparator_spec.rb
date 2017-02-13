@@ -53,4 +53,13 @@ RSpec.describe JsonChecker::JSONComparator do
   	jsonComparator.add_line("test")
   end 
 
+  it "return tempfile nil for invalid json" do
+    jsonComparator = JsonChecker::JSONComparator.new()
+    jsonComparator.tempfile_from_json(nil)
+  end
+
+  it "return tempfile nil for invalid diff" do
+    jsonComparator = JsonChecker::JSONComparator.new()
+    jsonComparator.html_report_from_diff(nil, nil)
+  end
 end
