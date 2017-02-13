@@ -43,6 +43,11 @@ RSpec.describe JsonChecker::JSONFetcher do
     expect(json).to be nil
   end
 
+  it "retusn nil for a nonexistent url" do
+    json = JsonChecker::JSONFetcher.json_from_url("http://json_checker_test.com")
+    expect(json).to be nil
+  end
+
   it "return nil for a invalid json" do
   	json = JsonChecker::JSONFetcher.json_from_content("{invalid json}")
     expect(json).to be nil
