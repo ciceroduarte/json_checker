@@ -27,10 +27,6 @@ module JsonChecker
       @reportItems << item
     end
 
-    def self.testandoHTML()
-      puts @reportItems
-    end
-
     def self.generate_output()
       htmlOutput = HTMLOutput.new()
       output = "<html>" + htmlOutput.add_style() + "<body>"

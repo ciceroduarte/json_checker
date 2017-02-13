@@ -28,7 +28,6 @@ module JsonChecker
 
       unless temp_json.nil? && temp_jsonToCompare.nil?
         diff = Diffy::Diff.new(temp_json.path, temp_jsonToCompare.path, :source => 'files', :context => 3)
-        puts diff
         html_report_from_diff(title, diff)
 
         temp_jsonToCompare.delete
