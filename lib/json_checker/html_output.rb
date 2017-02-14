@@ -2,6 +2,11 @@ module JsonChecker
   class HTMLOutput
   
     def self.add_validation_item(title, values)
+
+      if title.nil? || values.nil? || !values.is_a?(Array)
+        return
+      end
+
       item = "<h2>#{title}</h2>"
       item << "<div class=\"validation\" style=\"overflow-x:auto;\">
       <table><tr><th>Status</th><th>Key</th><th>Expected</th><th>Value</th></tr>"
