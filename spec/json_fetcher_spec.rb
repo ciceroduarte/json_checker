@@ -1,5 +1,6 @@
 require "spec_helper"
 require "json_checker/json_fetcher"
+require 'net/http'
 
 RSpec.describe JsonChecker::JSONFetcher do
 
@@ -82,4 +83,10 @@ RSpec.describe JsonChecker::JSONFetcher do
   	json = JsonChecker::JSONFetcher.json_from_content("{\"name\":\"test\"}")
     expect(json).not_to be nil
   end
+
+  it "return nil for a invalid response" do
+    response = JsonChecker::JSONFetcher.fetch_response(nil)
+    expect(response).to be nil
+  end
+
 end

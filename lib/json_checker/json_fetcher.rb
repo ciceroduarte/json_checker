@@ -21,12 +21,7 @@ module JsonChecker
       begin
         uri = URI(url)
         response = Net::HTTP.get_response(uri)
-        case response
-          when Net::HTTPSuccess then
-          return JSONFetcher.json_from_content(response.body)
-        else
-          puts"[ERROR] Connection error"
-        end  
+        return JSONFetcher.fetch_response(response)  
       rescue
       end
       
@@ -45,5 +40,15 @@ module JsonChecker
       end
       return nil
     end
+
+    def self.fetch_response(response)
+      case response
+        when Net::HTTPSuccess then
+          return JSONFetcher.json_from_content(response.body)
+        else
+          puts"[ERROR] Connection error"
+      end
+    end
+
   end
 end
