@@ -10,18 +10,13 @@ module JsonChecker
       item = "<h2>#{title}</h2>"
       item << "<div class=\"validation\" style=\"overflow-x:auto;\">
       <table><tr><th>Status</th><th>Key</th><th>Expected</th><th>Value</th></tr>"
-      
+
       values.each do |value|
-        item = item + value
+        item << value
       end
 
       item << "</table></div>"
-
-      if @reportItems.nil?
-        @reportItems = Array.new()
-      end
-
-      @reportItems << item
+      HTMLOutput.add_item(item)
     end
 
     def self.add_comparation_item(title, json)
@@ -31,10 +26,7 @@ module JsonChecker
       end
 
       item = "<h2>#{title}</h2>" + "<div class=\"diff\">" + json + "</div>"
-      if @reportItems.nil?
-        @reportItems = Array.new()
-      end
-      @reportItems << item
+      HTMLOutput.add_item(item)
     end
 
     def self.generate_output()
@@ -47,6 +39,13 @@ module JsonChecker
 
       htmlOutput.save_to_file(output)
     end
+
+    def self.add_item(item)
+      if @reportItems.nil?
+        @reportItems = Array.new()
+      end
+      @reportItems << item
+    end 
 
     def add_style()
       return "<style>  
