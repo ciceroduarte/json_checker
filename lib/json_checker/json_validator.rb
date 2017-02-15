@@ -1,4 +1,3 @@
-require "rubygems"
 require 'json'
 require 'json_checker/json_to_check'
 require 'json_checker/json_fetcher'

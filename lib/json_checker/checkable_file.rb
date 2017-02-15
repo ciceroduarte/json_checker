@@ -1,4 +1,3 @@
-
 require "json_checker/json_fetcher"
 
 module JsonChecker
