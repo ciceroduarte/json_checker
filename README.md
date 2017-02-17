@@ -1,5 +1,7 @@
 # JsonChecker
 
+Compare and validate JSON files
+
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
 [![Build Status](https://travis-ci.org/ciceroduarte/json_checker.svg?branch=master)](https://travis-ci.org/ciceroduarte/json_checker)
 [![Coverage Status](https://coveralls.io/repos/github/ciceroduarte/json_checker/badge.svg?branch=master)](https://coveralls.io/github/ciceroduarte/json_checker?branch=master)
@@ -20,9 +22,52 @@ Or install it yourself as:
 
     $ gem install json_checker
 
+## Configuration file
+
+```json
+# json-config.json
+{
+    "files": [
+        {
+			"name": "JSON example",
+			"remote-path": "http://private-8d36d-jsonchecker.apiary-mock.com/choices",
+			"keys" : {
+				"choice1": "Swift",
+		    	"choice2": "C",
+		    	"choice2": "Swift22",
+		    	"choice3": "Objective-C",
+		    	"choice6": "Java"
+		    },
+		    "compare-to": [
+                {
+                    "remote-path": "http://private-8d36d-jsonchecker.apiary-mock.com/choices2",
+                    "name": "Choices"
+                }
+		    ]
+		}
+    ]
+}
+```
+
+### Fields
+
+* `files`: List of files to validation.
+* `name`: Name of file to report.
+* `path`: Local path to file.
+* `remote-path`: Remote path to file.
+* `keys`: Key/value to check.
+* `compare-to`: List of files to compare
+
 ## Usage
 
-TODO: Write usage instructions here
+Add `json-config.json` to your path and run `json_checker`
+```sh
+$ json_checker
+```
+
+## HTML Output
+
+Output example [output.html](http://www.google.com.br)
 
 ## Development
 
