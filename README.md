@@ -67,7 +67,7 @@ $ json_checker
 
 ## HTML Output
 
-Output example [output.html](http://www.google.com.br)
+Output example [output.html](http://htmlpreview.github.io/?https://github.com/ciceroduarte/json_checker/blob/master/output.html)
 
 ## Development
 
