@@ -1,0 +1,96 @@
+<html>
+    <style>  
+        .addition { 
+            background: #eaffea; 
+        }
+        .remotion { 
+            background: #ffecec; 
+        }
+        .diff { 
+            outline: 1px solid #eff0d6;
+            margin: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .validation { 
+            margin: 5px; 
+        }
+        body { 
+            font-family: monospace; 
+        }
+        table { 
+            border-collapse: collapse; 
+            width: 100%;
+        }
+        td {
+            border: 1px solid #eff0d6; 
+        }
+        th { 
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        tr:hover { 
+            background-color: #f5f5f5
+        }
+        p { 
+            margin-top: 0em;
+            margin-bottom: 0em;
+            white-space: pre;
+            padding : 3;
+            color: #3e3333 
+        }
+    </style>
+    <body>
+        <h2>Validating JSON example values</h2>
+        <div class="validation" style="overflow-x:auto;">
+            <table>
+                <tr>
+                    <th>Status</th>
+                    <th>Key</th>
+                    <th>Expected</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Success</td>
+                    <td>choice1</td>
+                    <td>Swift</td>
+                    <td>Swift</td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>choice2</td>
+                    <td>Swift22</td>
+                    <td>Python</td>
+                </tr>
+                <tr>
+                    <td>Success</td>
+                    <td>choice3</td>
+                    <td>Objective-C</td>
+                    <td>Objective-C</td>
+                </tr>
+                <tr>
+                    <td>Not found</td>
+                    <td>choice6</td>
+                    <td>Java</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <h2>Comparing JSON example with Choices</h2>
+        <div class="diff">
+            <p class="null"> {</p>
+            <p class="null">   "choice1": "Swift",</p>
+            <p class="remotion">-  "choice2": "Python",</p>
+            <p class="addition">+  "choice2": "C",</p>
+            <p class="null">   "choice3": "Objective-C",</p>
+            <p class="remotion">-  "choice4": "Ruby"</p>
+            <p class="addition">+  "choice4": "Java"</p>
+            <p class="null"> }</p>
+        </div>
+    </body>
+</html>
