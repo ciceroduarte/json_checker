@@ -5,6 +5,7 @@ Compare and validate JSON files
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
 [![Build Status](https://travis-ci.org/ciceroduarte/json_checker.svg?branch=master)](https://travis-ci.org/ciceroduarte/json_checker)
 [![Coverage Status](https://coveralls.io/repos/github/ciceroduarte/json_checker/badge.svg?branch=master)](https://coveralls.io/github/ciceroduarte/json_checker?branch=master)
+![](http://ruby-gem-downloads-badge.herokuapp.com/json_checker?color=green&style=flat&type=total)
 
 ## Installation
 
