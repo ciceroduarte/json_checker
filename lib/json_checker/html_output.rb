@@ -48,7 +48,9 @@ module JsonChecker
     end 
 
     def add_style()
-      return "<style>  
+      return "
+        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
+        <style>  
         .addition { background: #eaffea; }
         .remotion { background: #ffecec; }
         .diff { outline: 1px solid #eff0d6; margin: 5px; padding-top: 5px; padding-bottom: 5px; }
