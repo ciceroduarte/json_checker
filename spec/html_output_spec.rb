@@ -5,7 +5,7 @@ RSpec.describe JsonChecker::HTMLOutput do
   
   it "htmloutput don't broken with a invalid report" do
     htmlOutput = JsonChecker::HTMLOutput.new
-    htmlOutput.save_to_file(nil)
+    htmlOutput.save_to_file(nil, nil)
   end
 
   it "htmloutput addValidation don't broken with a valid values" do
