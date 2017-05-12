@@ -30,7 +30,7 @@ module JsonChecker
           JSONComparator.compare(fileToCheck, fileToCheck.compareTo)
         end
       end
-      HTMLOutput.generate_output()
+      HTMLOutput.generate_output(config['output-path'])
     end
     
       def validate_JSON_with_keys(title, jsonKeys, json)

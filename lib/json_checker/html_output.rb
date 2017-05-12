@@ -29,7 +29,7 @@ module JsonChecker
       HTMLOutput.add_item(item)
     end
 
-    def self.generate_output()
+    def self.generate_output(output_path)
       htmlOutput = HTMLOutput.new()
       output = "<html>" + htmlOutput.add_style() + "<body>"
       @reportItems.each do |item| 
@@ -37,7 +37,7 @@ module JsonChecker
       end
       output << "</body></html>"
 
-      htmlOutput.save_to_file(output)
+      htmlOutput.save_to_file(output, output_path)
     end
 
     def self.add_item(item)
@@ -65,11 +65,18 @@ module JsonChecker
       </style>"
     end
 
-    def save_to_file(report)
+    def save_to_file(report, output_path)
+        
+      path = "output.html"
+      
+      unless output_path.nil?
+        path = output_path
+      end
+    
       if report.nil?
         puts "[ERROR] Invalid report"
       else
-        File.write("output.html", report)
+        File.write(path, report)
       end
     end
 
