@@ -56,9 +56,13 @@ module JsonChecker
     def value_for_key_with_split_character(key, json, splitCharacter)
         value = json
         key.split(splitCharacter).each do |item|
-            if !value.nil? && !item.empty?
-              value = is_numeric?(item) ? value[item.to_i] : value[item]
+          if !value.nil? && !item.empty?
+            if is_numeric?(item)
+              value = value.kind_of?(Array) ? value[item.to_i] : nil
+            else 
+              value = value.kind_of?(Array) ? nil : value[item]
             end
+          end
         end
         return value
     end
