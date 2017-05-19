@@ -11,7 +11,7 @@ RSpec.describe JsonChecker::JSONValidator do
   it "don't broken with invalid path" do
   	jsonValidator = JsonChecker::JSONValidator.new()
 
-  	jsonContent = {"array": [ {"item1":"item1"}, {"item2":"item2"} ]}
+  	jsonContent = "{\"array\": [ {\"item1\":\"item1\"}, {\"item2\":\"item2\"} ]}"
 	json = JsonChecker::JSONFetcher.json_from_content(jsonContent)
 
   	result = jsonValidator.value_for_key_with_split_character("array.item2", json, ".")
@@ -21,7 +21,7 @@ RSpec.describe JsonChecker::JSONValidator do
   it "return value for key" do
   	jsonValidator = JsonChecker::JSONValidator.new()
 
-  	jsonContent = { "array": [ {"item1":"item1"}, {"item2":"item2"} ] }
+  	jsonContent = "{ \"array\": [ {\"item1\":\"item1\"}, {\"item2\":\"item2\"} ] }"
 	json = JsonChecker::JSONFetcher.json_from_content(jsonContent)
 	
   	result = jsonValidator.value_for_key_with_split_character("array.1.item2", json, ".")
