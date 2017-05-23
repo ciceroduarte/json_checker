@@ -1,6 +1,8 @@
+require 'fileutils'
+
 module JsonChecker
   class HTMLOutput
-  
+
     def self.add_validation_item(title, values)
 
       if title.nil? || values.nil? || !values.is_a?(Array)
@@ -32,7 +34,7 @@ module JsonChecker
     def self.generate_output(output_path)
       htmlOutput = HTMLOutput.new()
       output = "<html>" + htmlOutput.add_style() + "<body>"
-      @reportItems.each do |item| 
+      @reportItems.each do |item|
         output << item
       end
       output << "</body></html>"
@@ -45,12 +47,12 @@ module JsonChecker
         @reportItems = Array.new()
       end
       @reportItems << item
-    end 
+    end
 
     def add_style()
       return "
         <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
-        <style>  
+        <style>
         .addition { background: #eaffea; }
         .remotion { background: #ffecec; }
         .diff { outline: 1px solid #eff0d6; margin: 5px; padding-top: 5px; padding-bottom: 5px; }
@@ -66,16 +68,17 @@ module JsonChecker
     end
 
     def save_to_file(report, output_path)
-        
+
       path = "output.html"
-      
+
       unless output_path.nil?
         path = output_path
       end
-    
+
       if report.nil?
         puts "[ERROR] Invalid report"
       else
+        FileUtils.mkdir_p(File.dirname(path))
         File.write(path, report)
       end
     end
